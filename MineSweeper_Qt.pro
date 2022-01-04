@@ -11,21 +11,32 @@ CONFIG += c++11
 SOURCES += \
     cell.cpp \
     config.cpp \
+    diaabout.cpp \
+    diasettings.cpp \
     grid.cpp \
+    labelcust.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     cell.h \
     config.h \
+    diaabout.h \
+    diasettings.h \
     grid.h \
+    labelcust.h \
     mainwindow.h \
     randomizer.h
 
 FORMS += \
+    diaabout.ui \
+    diasettings.ui \
     mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+	res/res.qrc

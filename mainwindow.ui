@@ -10,6 +10,12 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -28,7 +34,83 @@
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>false</bool>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLCDNumber" name="lcdNum_MineCount">
+        <property name="styleSheet">
+         <string notr="true">QLCDNumber{
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgb(113, 113, 113);
+  border-width: 2px;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="LabelCust" name="lb_status">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLCDNumber" name="lcdNum_Time">
+        <property name="styleSheet">
+         <string notr="true">QLCDNumber{
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgb(113, 113, 113);
+  border-width: 2px;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Grid" name="grid" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -38,9 +120,66 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Игра</string>
+    </property>
+    <addaction name="act_StartAgain"/>
+    <addaction name="separator"/>
+    <addaction name="act_settings"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="act_AboutQt"/>
+    <addaction name="act_AboutProg"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <action name="act_settings">
+   <property name="text">
+    <string>Настройки</string>
+   </property>
+  </action>
+  <action name="act_rules">
+   <property name="text">
+    <string>Правила</string>
+   </property>
+  </action>
+  <action name="act_AboutProg">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+  <action name="act_AboutQt">
+   <property name="text">
+    <string>О Qt</string>
+   </property>
+  </action>
+  <action name="act_StartAgain">
+   <property name="text">
+    <string>Начать заново</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Grid</class>
+   <extends>QWidget</extends>
+   <header location="global">grid.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LabelCust</class>
+   <extends>QLabel</extends>
+   <header location="global">labelcust.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

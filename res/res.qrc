@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>flag.svg</file>
+        <file>mine.svg</file>
+        <file>question.svg</file>
+        <file>emoji_shocked.svg</file>
+        <file>emoji_happy.svg</file>
+        <file>emoji_dead.svg</file>
+    </qresource>
+</RCC>
