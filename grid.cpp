@@ -1,7 +1,6 @@
 #include "grid.h"
 #include "config.h"
 #include "cell.h"
-#include "randomizer.h"
 
 #include <QSet>
 #include <QDebug>
@@ -11,11 +10,10 @@
 Grid::Grid(QWidget *parent) : QWidget(parent)
 {
 	m_activeMinesCount = 0;
+	m_activeFreeCount = 0;
 	m_layout = new QGridLayout(this);
 	m_layout->setSpacing(1);
 	m_layout->setMargin(0);
-
-//	init();
 }
 
 Grid::~Grid()
@@ -64,6 +62,8 @@ void Grid::init()
 
 	// Determine the number of Mines
 	setNumbersAboutMines();
+
+	m_activeFreeCount = g_cfg.m_width * g_cfg.m_width;
 }
 
 void Grid::showEnvironment(Cell *currCell)
@@ -101,10 +101,20 @@ void Grid::setEnabledCells(bool isEnabled)
 	}
 }
 
+void Grid::reduceFreeCells()
+{
+	m_activeFreeCount--;
+	if (m_activeFreeCount == g_cfg.m_mineCount) {
+		emit sigYouWin();
+	}
+}
+
 void Grid::clear()
 {
 	for (QVector<Cell*>& row: m_cells) {
-		qDeleteAll(row);
+		for (Cell* cell: row) {
+			cell->deleteLater();
+		}
 	}
 	m_cells.clear();
 }

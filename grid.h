@@ -18,10 +18,12 @@ public:
 	void	init();
 	void	showEnvironment(Cell* currCell);
 	void	setEnabledCells(bool isEnabled);
+	void	reduceFreeCells();
 
 private:
 	QVector<QVector<Cell*>>		m_cells;
 	int							m_activeMinesCount;
+	int							m_activeFreeCount;
 	QGridLayout					*m_layout;
 
 private:
@@ -33,6 +35,10 @@ private:
 
 signals:
 	void sigGameOver();
+	void sigYouWin();
+	void sigInstallFlag();
+	void sigRemoveFlag();
+	void sigPressedToCell();
 };
 
 #endif // GRID_H

@@ -1,9 +1,0 @@
-*.user
-*.autosave
-*.swp
-*.o
-*.a
-*.pro.user*
-build*
-.~lock*
- 

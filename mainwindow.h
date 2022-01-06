@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QElapsedTimer>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,8 +27,14 @@ public slots:
 	void slotAboutQt();
 	void slotAboutProgram();
 	void slotOpenSettings();
+	void slotYouWin();
+	void slotReduceNumMines();
+	void slotTimeTick();
+	void slotTimerStart();
+	void slotRemoveFlag();
 
 private:
 	Ui::MainWindow	*ui;
+	QTimer			m_timer;
 };
 #endif // MAINWINDOW_H

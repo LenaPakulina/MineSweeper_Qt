@@ -86,13 +86,21 @@ void Cell::addMine()
 
 void Cell::setNumMine()
 {
+	bool lastUncovered = m_isUncovered;
 	m_isUncovered = true;
 	setStyleSheet("border: 1px solid #8f8f91;");
 	if (m_numMines == 0) {
+		if (lastUncovered == false) {
+			m_mainGrid->reduceFreeCells();
+		}
 		setEnabled(false);
 		return;
 	}
 	setText(QString::number(m_numMines));
+
+	if (lastUncovered == false) {
+		m_mainGrid->reduceFreeCells();
+	}
 }
 
 int Cell::getNumMine() const
@@ -107,16 +115,25 @@ bool Cell::isUncovered()
 
 void Cell::mousePressEvent(QMouseEvent *event)
 {
+	if (m_mainGrid) {
+		emit m_mainGrid->sigPressedToCell();
+	}
 	if (event->button() == Qt::MouseButton::RightButton) {
 		if (m_isUncovered) {
 			return;
 		}
 		if (m_publicState == CELL_STATE::FREE) {
 			setPublicState(CELL_STATE::FLAG);
+			if (m_mainGrid) {
+				emit m_mainGrid->sigInstallFlag();
+			}
 		} else if (m_publicState == CELL_STATE::FLAG) {
 			setPublicState(CELL_STATE::QUESTIONS);
 		} else if (m_publicState == CELL_STATE::QUESTIONS) {
 			setPublicState(CELL_STATE::FREE);
+			if (m_mainGrid) {
+				emit m_mainGrid->sigRemoveFlag();
+			}
 		}
 	} else if (event->button() == Qt::MouseButton::LeftButton) {
 		if (m_privateState == CELL_STATE::FREE) {

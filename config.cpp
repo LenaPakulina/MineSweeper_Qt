@@ -5,14 +5,15 @@
 #include <QJsonDocument>
 #include <QApplication>
 #include <QDir>
+#include <QLibraryInfo>
 
 Config	g_cfg;
 
 Config::Config()
 {
-	m_height = 10;
-	m_width = 10;
-	m_mineCount = 30;
+	m_height = 16;
+	m_width = 16;
+	m_mineCount = 40;
 	m_lastLanguage = 0;
 
 	m_saveConfig = false;
@@ -61,10 +62,6 @@ void Config::save()
 
 void Config::load()
 {
-	if (m_saveConfig == false) {
-		return;
-	}
-
 	QString path = getJsonConfigPath();
 	QFile f(path);
 	if (!f.exists()) {
@@ -88,10 +85,41 @@ void Config::load()
 	m_windowGeometry = QByteArray::fromBase64(obj["windowGeometry"].toString().toLatin1());
 	m_lastOpenFile = obj["lastOpenFile"].toString();
 	m_saveConfig = obj["saveConfig"].toBool();
-	m_width = obj["width"].toInt();
-	m_height = obj["height"].toInt();
-	m_mineCount = obj["mineCount"].toInt();
-	m_lastLanguage = obj["lastLanguage"].toInt();
+	m_width = obj["width"].toString().toInt();
+	m_height = obj["height"].toString().toInt();
+	m_mineCount = obj["mineCount"].toString().toInt();
+	m_lastLanguage = obj["lastLanguage"].toString().toInt();
+
+	changeLanguage();
+}
+
+void Config::changeLanguage()
+{
+	switch (m_lastLanguage) {
+	case 1: {
+		if (m_translator.load(QDir::toNativeSeparators(qApp->applicationDirPath()
+														+ "/" + "MineSweeper_en"), ".")) {
+			qApp->installTranslator(&m_translator);
+		}
+		break;
+	}
+	default:{
+		if (m_translator.load(QLocale::system(),
+								  "qt", "_",
+								  QLibraryInfo::location(QLibraryInfo::TranslationsPath))){
+				qApp->installTranslator(&m_translator);
+		}
+		break;
+	}
+	}
+}
+
+bool Config::checkParams(int width, int height, int mineCount)
+{
+	if ((width  *height) <= mineCount) {
+		return false;
+	}
+	return true;
 }
 
 QString Config::mpath(std::initializer_list<QString> list)

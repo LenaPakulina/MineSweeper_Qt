@@ -21,6 +21,12 @@ private:
 private slots:
 	void slotApplySetup();
 	void slotOpenFileManager();
+	void slotIndexChanged();
+	void slotLanIndexChanged();
+
+	// QWidget interface
+protected:
+	void changeEvent(QEvent *event);
 };
 
 #endif // DIASETTINGS_H
