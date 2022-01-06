@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "config.h"
+#include "common/mainwindow.h"
+#include "common/config.h"
 
 #include <QDebug>
 #include <QFile>

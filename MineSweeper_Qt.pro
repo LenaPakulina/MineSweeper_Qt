@@ -12,28 +12,28 @@ DESTDIR = $$OUT_PWD/bin
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    cell.cpp \
-    config.cpp \
-    diaabout.cpp \
-    diasettings.cpp \
-    grid.cpp \
-    labelcust.cpp \
-    main.cpp \
-    mainwindow.cpp
+	common/cell.cpp \
+	common/config.cpp \
+	common/diaabout.cpp \
+	common/diasettings.cpp \
+	common/grid.cpp \
+	common/labelcust.cpp \
+	main.cpp \
+	common/mainwindow.cpp
 
 HEADERS += \
-    cell.h \
-    config.h \
-    diaabout.h \
-    diasettings.h \
-    grid.h \
-    labelcust.h \
-    mainwindow.h
+	common/cell.h \
+	common/config.h \
+	common/diaabout.h \
+	common/diasettings.h \
+	common/grid.h \
+	common/labelcust.h \
+	common/mainwindow.h
 
 FORMS += \
-    diaabout.ui \
-    diasettings.ui \
-    mainwindow.ui
+	common/diaabout.ui \
+	common/diasettings.ui \
+	common/mainwindow.ui
 
 TRANSLATIONS = MineSweeper_en.ts
 
